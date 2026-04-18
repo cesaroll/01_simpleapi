@@ -3,6 +3,7 @@ package com.example.simpleapi.controller;
 import com.example.simpleapi.dto.ItemRequest;
 import com.example.simpleapi.entity.Item;
 import com.example.simpleapi.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/items")
+@RequiredArgsConstructor
 public class ItemController {
 
     private final ItemService service;
-
-    public ItemController(ItemService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public List<Item> getAll() {

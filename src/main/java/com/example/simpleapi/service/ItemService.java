@@ -4,18 +4,16 @@ import com.example.simpleapi.dto.ItemRequest;
 import com.example.simpleapi.entity.Item;
 import com.example.simpleapi.exception.ResourceNotFoundException;
 import com.example.simpleapi.repository.ItemRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ItemService {
 
     private final ItemRepository repository;
-
-    public ItemService(ItemRepository repository) {
-        this.repository = repository;
-    }
 
     public List<Item> findAll() {
         return repository.findAll();
@@ -27,7 +25,7 @@ public class ItemService {
     }
 
     public Item create(ItemRequest req) {
-        return repository.save(new Item(req.name(), req.description()));
+        return repository.save(Item.builder().name(req.name()).description(req.description()).build());
     }
 
     public Item update(Long id, ItemRequest req) {
