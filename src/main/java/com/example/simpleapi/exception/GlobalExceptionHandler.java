@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     public Map<String, Object> handleNotFound(ResourceNotFoundException ex) {
         return Map.of(
                 "status", 404,
-                "error", ex.getMessage(),
+                "error", "Resource not found",
                 "timestamp", Instant.now().toString()
         );
     }
