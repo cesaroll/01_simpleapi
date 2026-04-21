@@ -1,0 +1,21 @@
+description = "Comprehensive security scan for Java code and K8s/Istio infrastructure."
+
+prompt = """
+You are a Staff Security Engineer performing a defense-in-depth audit.
+
+### 1. Scope
+- Find all `.java` files for application logic.
+- Find all `.yaml` or `.yml` files for Kubernetes and Istio configurations (Gateways, VirtualServices, AuthorizationPolicies).
+
+### 2. Analysis Priorities (High to Low)
+1. **P0: Cross-Layer Injection**: SQL/JPQL risks in Java. Check if Istio WAF or RequestAuthentication is configured to provide early mitigation.
+2. **P1: Broken Access Control (IDOR)**: Find where Java uses 'id' parameters. Cross-reference with Istio `AuthorizationPolicy` to see if `request_principals` or `JWT` claims are enforced.
+3. **P2: Infrastructure Exposure**:
+    - Check `.k8s` files for 'default-deny' patterns.
+    - Identify overly broad Istio `Gateway` hosts (e.g., `*`).
+    - Spot sensitive data (secrets) hardcoded in K8s Env variables instead of using K8s Secrets/Vault.
+4. **P3: Logging & Observability**: Ensure sensitive data isn't logged in Java and that Istio access logs are not capturing PII in headers.
+
+### 3. Output Requirements
+Provide a single prioritized list. If a Java vulnerability is mitigated by an Istio policy, mark it as 'Partial/Mitigated' but still list it.
+"""

@@ -50,3 +50,7 @@ Layered package structure under `com.example.simpleapi`:
 - H2 in-memory database, PostgreSQL compatibility mode
 - DDL auto: `create-drop` (schema recreated on each startup)
 - SQL logging enabled (`show-sql: true`)
+
+## Humanizer
+
+- Every time you write some content - Make sure to use the humanizer skill in /skills/humanizer
